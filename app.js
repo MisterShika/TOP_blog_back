@@ -1,12 +1,12 @@
+require('dotenv').config();
+
 const express = require('express');
 
 const app = express();
 
-app.get('/api', (req, res) => {
-    res.json({
-        message: 'Hello World'
-    });
-});
+const accountRouter = require("./routes/accountRouter");
+
+app.use('/user', accountRouter);
 
 app.listen(3000, () => {
     console.log(`Server started on http://localhost:3000`)
