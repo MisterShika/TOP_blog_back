@@ -5,6 +5,13 @@ async function getUsers (req, res) {
     res.json(users);
 }
 
+async function getSingleUser (req, res) {
+    const email = req.params.email;
+    const user = await db.getSingleUser(email);
+    res.json(user);
+}
+
 module.exports = {
     getUsers,
+    getSingleUser,
 }

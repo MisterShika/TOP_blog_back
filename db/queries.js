@@ -11,6 +11,21 @@ async function getUsers () {
     }
 }
 
+async function getSingleUser (email) {
+    try{
+        const user = await prisma.user.findUnique({
+            where : {
+                email: email
+            }
+        });
+        return user;
+    }catch (error) {
+        console.error("Error in getting single user: ", error);
+        throw error;
+    }
+}
+
 module.exports = {
     getUsers,
+    getSingleUser,
 }
