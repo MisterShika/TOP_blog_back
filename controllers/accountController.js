@@ -1,4 +1,4 @@
-const db = require("../db/queries");
+const db = require("../db/accountQueries");
 
 async function getUsers (req, res) {
     const users = await db.getUsers();
