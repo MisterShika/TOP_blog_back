@@ -11,6 +11,21 @@ async function getPosts () {
     }
 }
 
+async function getSinglePost (id) {
+    try{
+        const post = await prisma.post.findUnique({
+            where: {
+                id: id
+            }
+        });
+        return post;
+    }catch (error){
+        console.error("Error getting single post", error);
+        throw error;
+    }
+}
+
 module.exports = {
-    getPosts
+    getPosts,
+    getSinglePost
 }

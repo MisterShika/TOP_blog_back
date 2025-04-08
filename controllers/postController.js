@@ -5,6 +5,14 @@ async function getPosts (req, res) {
     res.json(posts);
 }
 
+async function getSinglePost (req, res) {
+    let {postId} = req.params;
+    postId = parseInt(postId);
+    const post = await db.getSinglePost(postId);
+    res.json(post);
+}
+
 module.exports = {
     getPosts,
+    getSinglePost,
 }
