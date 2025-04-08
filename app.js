@@ -6,6 +6,8 @@ const app = express();
 
 const accountRouter = require("./routes/accountRouter");
 
+app.use(express.json());
+
 app.use('/user', accountRouter);
 
 app.listen(3000, () => {

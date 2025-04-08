@@ -1,5 +1,6 @@
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
+const bcrypt = require('bcrypt');
 
 async function getUsers () {
     try{
@@ -25,7 +26,24 @@ async function getSingleUser (email) {
     }
 }
 
+async function addSingleUser (email, password) {
+    const hashedPassword = await bcrypt.hash(password, 12);
+    try{
+        const user = await prisma.user.create({
+            data:{
+                email: email,
+                password: hashedPassword
+            }
+        })
+        return user;
+    }catch (error){
+        console.error("Error adding single user: ", error);
+        throw error;
+    }
+}
+
 module.exports = {
     getUsers,
     getSingleUser,
+    addSingleUser,
 }
