@@ -1,7 +1,8 @@
 const db = require("../db/commentQueries");
 
 async function getComments (req, res) {
-    const {postId} = req.body;
+    let {postId} = req.params;
+    postId = parseInt(postId);
     const comments = await db.getComments(postId);
     res.json(comments);
 }
