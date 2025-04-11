@@ -12,11 +12,11 @@ async function getUsers () {
     }
 }
 
-async function getSingleUser (email) {
+async function getSingleUser (id) {
     try{
         const user = await prisma.user.findUnique({
             where : {
-                email: email
+                id: id
             }
         });
         return user;

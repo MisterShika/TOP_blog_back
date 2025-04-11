@@ -6,8 +6,9 @@ async function getUsers (req, res) {
 }
 
 async function getSingleUser (req, res) {
-    const email = req.params.email;
-    const user = await db.getSingleUser(email);
+    let {id} = req.params;
+    id = parseInt(id);
+    const user = await db.getSingleUser(id);
     res.json(user);
 }
 

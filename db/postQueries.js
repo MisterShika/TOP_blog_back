@@ -3,7 +3,15 @@ const prisma = new PrismaClient();
 
 async function getPosts () {
     try{
-        const posts = await prisma.post.findMany();
+        const posts = await prisma.post.findMany({
+            include: {
+                author: {
+                    select: {
+                        email: true
+                    },
+                },
+            },
+        });
         return posts;
     }catch (error){
         console.error("Error getting posts", error);
@@ -16,6 +24,13 @@ async function getSinglePost (id) {
         const post = await prisma.post.findUnique({
             where: {
                 id: id
+            },
+            include: {
+                author: {
+                    select: {
+                        email: true,
+                    },
+                },
             }
         });
         return post;

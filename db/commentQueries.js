@@ -6,6 +6,13 @@ async function getComments (id) {
         const comments = await prisma.comment.findMany({
             where : {
                 parentId: id
+            },
+            include: {
+                author: {
+                    select: {
+                        email: true,
+                    },
+                },
             }
         })
         return comments;
