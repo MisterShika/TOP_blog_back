@@ -12,7 +12,15 @@ async function getSinglePost (req, res) {
     res.json(post);
 }
 
+async function getPostsByAuthor (req, res) {
+    let {userId} = req.params;
+    userId = parseInt(userId);
+    const posts = await db.getPostsByAuthor(userId);
+    res.json(posts);
+}
+
 module.exports = {
     getPosts,
     getSinglePost,
+    getPostsByAuthor
 }

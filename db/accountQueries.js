@@ -4,7 +4,13 @@ const bcrypt = require('bcrypt');
 
 async function getUsers () {
     try{
-        const users = await prisma.user.findMany();
+        const users = await prisma.user.findMany({
+            select: {
+                id: true,
+                email: true,
+                role: true,
+            },
+    });
         return users;
     }catch (error){
         console.error("Error in getting users: ", error);
@@ -17,6 +23,11 @@ async function getSingleUser (id) {
         const user = await prisma.user.findUnique({
             where : {
                 id: id
+            },
+            select: {
+                id: true,
+                email: true,
+                role: true,
             }
         });
         return user;

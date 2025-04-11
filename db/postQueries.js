@@ -40,7 +40,22 @@ async function getSinglePost (id) {
     }
 }
 
+async function getPostsByAuthor (id) {
+    try{
+        const posts = await prisma.post.findMany({
+            where: {
+                authorId: id
+            }
+        })
+        return posts;
+    }catch (error){
+        console.error("Error getting posts by author", error);
+        throw error;
+    }
+}
+
 module.exports = {
     getPosts,
-    getSinglePost
+    getSinglePost,
+    getPostsByAuthor
 }
