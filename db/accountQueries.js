@@ -54,7 +54,6 @@ async function addSingleUser (email, password) {
 }
 
 async function loginUser (email, password) {
-    console.log('DB Function fired');
     const user = await prisma.user.findUnique({
         where: {
             email: email
@@ -65,7 +64,7 @@ async function loginUser (email, password) {
     const match = await bcrypt.compare(password, user.password);
     if (!match) return null;
 
-    return true;
+    return user.email;
 }
 
 module.exports = {

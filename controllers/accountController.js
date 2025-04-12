@@ -1,4 +1,6 @@
 const db = require("../db/accountQueries");
+const jwt = require('jsonwebtoken');
+require('dotenv').config();
 
 async function getUsers (req, res) {
     const users = await db.getUsers();
@@ -30,7 +32,9 @@ async function postLogin (req, res) {
         return res.status(401).json({ message: "Invalid email or password" });
     }
 
-    res.json('Success');
+    const token = jwt.sign(loginData, process.env.ACCESS_TOKEN_SECRET);
+
+    res.json(token);
 }
 
 module.exports = {
