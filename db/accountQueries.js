@@ -53,8 +53,24 @@ async function addSingleUser (email, password) {
     }
 }
 
+async function loginUser (email, password) {
+    console.log('DB Function fired');
+    const user = await prisma.user.findUnique({
+        where: {
+            email: email
+        }
+    });
+    if (!user) return null;
+
+    const match = await bcrypt.compare(password, user.password);
+    if (!match) return null;
+
+    return true;
+}
+
 module.exports = {
     getUsers,
     getSingleUser,
     addSingleUser,
+    loginUser
 }

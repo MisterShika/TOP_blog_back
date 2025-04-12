@@ -23,8 +23,19 @@ async function postAddUser (req, res) {
     }
 }
 
+async function postLogin (req, res) {
+    const {email, password} = req.body;
+    const loginData = await db.loginUser(email, password);
+    if(!loginData){
+        return res.status(401).json({ message: "Invalid email or password" });
+    }
+
+    res.json('Success');
+}
+
 module.exports = {
     getUsers,
     getSingleUser,
     postAddUser,
+    postLogin,
 }

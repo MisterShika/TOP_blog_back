@@ -6,6 +6,7 @@ accountRouter.get('/', accountController.getUsers);
 accountRouter.get('/:id', accountController.getSingleUser);
 
 accountRouter.post('/addUser', accountController.postAddUser);
+accountRouter.post('/login', accountController.postLogin);
 
 
 module.exports = accountRouter;
