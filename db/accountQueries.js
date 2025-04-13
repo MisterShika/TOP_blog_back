@@ -38,6 +38,15 @@ async function getSingleUser (id) {
 }
 
 async function addSingleUser (email, password) {
+    //Can't add single user if user exists
+    const user = await prisma.user.findUnique({
+        where: {
+            email: email
+        }
+    });
+    if (user) return null;
+
+    //Otherwise hash password and add user
     const hashedPassword = await bcrypt.hash(password, 12);
     try{
         const user = await prisma.user.create({

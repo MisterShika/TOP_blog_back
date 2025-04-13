@@ -34,7 +34,7 @@ async function postLogin (req, res) {
 
     const token = jwt.sign(loginData, process.env.ACCESS_TOKEN_SECRET);
 
-    res.json(token);
+    res.json({token});
 }
 
 module.exports = {
