@@ -21,7 +21,7 @@ async function getPostsByAuthor (req, res) {
 
 async function postAddPost (req, res) {
     const {title, content} = req.body;
-    const userId = req.user.loginData.id;
+    const userId = parseInt(req.user.loginData.id);
 
     try{
         const post = await db.postAddPost(userId, title, content);

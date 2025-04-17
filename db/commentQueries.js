@@ -22,6 +22,23 @@ async function getComments (id) {
     }
 }
 
+async function postAddComment (parentId, authorId, body) {
+    try{
+        const comment = await prisma.comment.create({
+            data:{
+                parentId,
+                body,
+                authorId
+            }
+        })
+        return comment;
+    }catch (error){
+        console.error("Error posting single comment", error);
+        throw error;
+    }
+}
+
 module.exports = {
-    getComments
+    getComments,
+    postAddComment
 }
