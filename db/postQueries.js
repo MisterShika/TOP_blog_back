@@ -54,8 +54,25 @@ async function getPostsByAuthor (id) {
     }
 }
 
+async function postAddPost (id, title, body) {
+    try{
+        const post = await prisma.post.create({
+            data:{
+                title,
+                body,
+                authorId: id
+            }
+        })
+        return post;
+    }catch (error){
+        console.error("Error creating post backend", error);
+        throw error;
+    }
+}
+
 module.exports = {
     getPosts,
     getSinglePost,
-    getPostsByAuthor
+    getPostsByAuthor,
+    postAddPost
 }

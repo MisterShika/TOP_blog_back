@@ -73,7 +73,10 @@ async function loginUser (email, password) {
     const match = await bcrypt.compare(password, user.password);
     if (!match) return null;
 
-    return user.email;
+    return {
+        id: user.id,
+        email: user.email
+    };
 }
 
 module.exports = {

@@ -19,8 +19,22 @@ async function getPostsByAuthor (req, res) {
     res.json(posts);
 }
 
+async function postAddPost (req, res) {
+    const {title, content} = req.body;
+    const userId = req.user.loginData.id;
+
+    try{
+        const post = await db.postAddPost(userId, title, content);
+        res.status(201).json(post);
+    }catch (error){
+        console.error("Post create controller error:", error);
+        res.status(500).json({ error: 'Failed to create user' });
+    }
+}
+
 module.exports = {
     getPosts,
     getSinglePost,
-    getPostsByAuthor
+    getPostsByAuthor,
+    postAddPost
 }

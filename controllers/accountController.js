@@ -32,7 +32,7 @@ async function postLogin (req, res) {
         return res.status(401).json({ message: "Invalid email or password" });
     }
 
-    const token = jwt.sign(loginData, process.env.ACCESS_TOKEN_SECRET);
+    const token = jwt.sign({loginData}, process.env.ACCESS_TOKEN_SECRET);
 
     res.json({token});
 }
