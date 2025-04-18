@@ -53,6 +53,11 @@ async function addSingleUser (email, password) {
             data:{
                 email: email,
                 password: hashedPassword
+            },
+            select: {
+                id: true,
+                email: true,
+                role: true
             }
         })
         return user;
@@ -75,7 +80,8 @@ async function loginUser (email, password) {
 
     return {
         id: user.id,
-        email: user.email
+        email: user.email,
+        role: user.role
     };
 }
 

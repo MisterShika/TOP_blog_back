@@ -18,7 +18,8 @@ async function postAddUser (req, res) {
     const {email, password} = req.body;
     try{
         const user = await db.addSingleUser(email, password);
-        res.status(201).json(user.email);
+        const token = jwt.sign({ loginData: user }, process.env.ACCESS_TOKEN_SECRET);
+        res.status(201).json({token});
     }catch (error){
         console.error("Controller error:", error);
         res.status(500).json({ error: 'Failed to create user' });
